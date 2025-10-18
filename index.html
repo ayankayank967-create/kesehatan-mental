@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfCare - Layanan Kesehatan Mental Remaja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 2rem 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .promo-badge {
+            background: #ffd700;
+            color: #764ba2;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 15rem;
+            color: #667eea;
+            opacity: 0.1;
+        }
+
+        /* Features */
+        .features {
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Counselors */
+        .counselors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .counselor-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .counselor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .counselor-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .counselor-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .counselor-info h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .counselor-info .degree {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .specialization {
+            background: #f0f0f0;
+            padding: 0.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        /* Booking Form */
+        .booking {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .booking .section-title {
+            color: white;
+        }
+
+        .booking .section-title::after {
+            background: white;
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #667eea;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                display: none;
+            }
+
+            .booking-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-heart-pulse"></i>
+                <span>SelfCare</span>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#counselors">Konselor</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#booking">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>🌈 Selamat Datang di SelfCare</h1>
+        <p>Ruang Aman untuk Kesehatan Mental Remaja</p>
+        <div class="promo-badge">
+            🎁 2 Sesi Konsultasi Pertama GRATIS!
+        </div>
+        <br>
+        <a href="#booking" class="cta-button">Booking Sekarang</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">Tentang SelfCare</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p style="margin-bottom: 1rem;">
+                    <strong>SelfCare</strong> adalah platform layanan kesehatan mental yang didedikasikan khusus untuk remaja. Kami memahami bahwa masa remaja adalah periode penuh tantangan, dan kami di sini untuk mendukungmu.
+                </p>
+                <p style="margin-bottom: 1rem;">
+                    Dengan tim konselor profesional dan berpengalaman, kami menyediakan ruang aman dan nyaman untuk berbagi, belajar, dan tumbuh bersama.
+                </p>
+                <p>
+                    💙 <em>Kesehatan mentalmu penting, dan kamu tidak sendirian!</em>
+                </p>
+            </div>
+            <div class="about-image">
+                <i class="fas fa-brain"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="services" class="features">
+        <h2 class="section-title">Layanan Kami</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Konseling Individual</h3>
+                <p>Sesi privat one-on-one dengan konselor profesional</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-user-shield"></i>
+                <h3>Privasi Terjamin</h3>
+                <p>Semua informasi dijaga kerahasiaannya dengan ketat</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-clock"></i>
+                <h3>Fleksibel</h3>
+                <p>Jadwal konsultasi yang disesuaikan dengan kesibukanmu</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-laptop"></i>
+                <h3>Online & Offline</h3>
+                <p>Pilih sesi tatap muka atau online sesuai kenyamananmu</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Konselor Bersertifikat</h3>
+                <p>Tim profesional dengan latar belakang kesehatan masyarakat</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Ramah Remaja</h3>
+                <p>Pendekatan yang disesuaikan dengan kebutuhan remaja</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counselors -->
+    <section id="counselors">
+        <h2 class="section-title">Tim Konselor Kami</h2>
+        <div class="counselors-grid">
+            <div class="counselor-card">
+                <div class="counselor-image">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="counselor-info">
+                    <h3>M. Qadri Al Qifar</h3>
+                    <p class="degree">S.K.M</p>
+                    <div class="specialization">Spesialis Kesehatan Mental Remaja</div>
+                </div>
+            </div>
+            <div class="counselor-card">
+                <div class="counselor-image">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="counselor-info">
+                    <h3>Monal</h3>
+                    <p class="degree">S.K.M</p>
+                    <div class="specialization">Konselor Kecemasan & Stress</div>
+                </div>
+            </div>
+            <div class="counselor-card">
+                <div class="counselor-image">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="counselor-info">
+                    <h3>Andes Aboni</h3>
+                    <p class="degree">S.K.M</p>
+                    <div class="specialization">Terapis Perilaku Kognitif</div>
+                </div>
+            </div>
+            <div class="counselor-card">
+                <div class="counselor-image">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="counselor-info">
+                    <h3>Salmansyah Ramdhan</h3>
+                    <p class="degree">S.K.M</p>
+                    <div class="specialization">Konselor Motivasi & Pengembangan Diri</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <h2 class="section-title">Booking Konsultasi</h2>
+        <div class="booking-form">
+            <div class="success-message" id="successMessage">
+                ✅ Booking berhasil! Kami akan menghubungi Anda segera.
+            </div>
+            <form id="bookingForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap *</label>
+                    <input type="text" id="name" required placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label for="age">Usia *</label>
+                    <input type="number" id="age" required min="10" max="25" placeholder="Masukkan usia">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required placeholder="contoh@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Nomor WhatsApp *</label>
+                    <input type="tel" id="phone" required placeholder="08xxxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label for="counselor">Pilih Konselor *</label>
+                    <select id="counselor" required>
+                        <option value="">-- Pilih Konselor --</option>
+                        <option value="M. Qadri Al Qifar, S.K.M">M. Qadri Al Qifar, S.K.M</option>
+                        <option value="Monal, S.K.M">Monal, S.K.M</option>
+                        <option value="Andes Aboni, S.K.M">Andes Aboni, S.K.M</option>
+                        <option value="Salmansyah Ramdhan, S.K.M">Salmansyah Ramdhan, S.K.M</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="session-type">Tipe Sesi *</label>
+                    <select id="session-type" required>
+                        <option value="">-- Pilih Tipe Sesi --</option>
+                        <option value="online">Online (Video Call)</option>
+                        <option value="offline">Offline (Tatap Muka)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Tanggal Preferensi *</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Ceritakan sedikit tentang yang ingin kamu konsultasikan (Opsional)</label>
+                    <textarea id="message" rows="4" placeholder="Tulis di sini..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Kirim Booking
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>🌟 SelfCare</h3>
+            <p>Bersama Merawat Kesehatan Mental Remaja</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2024 SelfCare. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                <i class="fas fa-phone"></i> Hotline: 0800-SELFCARE<br>
+                <i class="fas fa-envelope"></i> Email: hello@selfcare.id
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const counselor = document.getElementById('counselor').value;
+            const sessionType = document.getElementById('session-type').value;
+            const date = document.getElementById('date').value;
+            const message = document.getElementById('message').value;
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+
+            // Reset form
+            document.getElementById('bookingForm').reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+
+            // Log data (In production, send to backend)
+            console.log({
+                name, age, email, phone, counselor, sessionType, date, message
+            });
+
+            // Optional: Send WhatsApp message
+            const waMessage = `Halo SelfCare! Saya ingin booking konsultasi:\n\nNama: ${name}\nUsia: ${age}\nKonselor: ${counselor}\nTipe: ${sessionType}\nTanggal: ${date}`;
+            // window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(waMessage)}`);
+        }
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+
+        // Active navigation on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
